@@ -58,6 +58,10 @@ void AAuraCharacterBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	// 使用 DOREPLIFETIME 宏将 对应 属性标记为需要网络复制的属性。
+	// 这意味着在网络多人游戏中，服务器上该属性的变化会自动同步到所有连接的客户端。
+	// 当服务器端的 对应 属性 值改变时，客户端对应的 AAuraCharacterBase 实例的 对应 属性也会更新
+	
 	DOREPLIFETIME(AAuraCharacterBase, bIsStunned);
 	DOREPLIFETIME(AAuraCharacterBase, bIsBurned);
 	DOREPLIFETIME(AAuraCharacterBase, bIsBeingShocked);
