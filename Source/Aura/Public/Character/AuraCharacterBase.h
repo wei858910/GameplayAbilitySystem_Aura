@@ -26,7 +26,15 @@ class AURA_API AAuraCharacterBase : public ACharacter, public IAbilitySystemInte
 public:
 	AAuraCharacterBase();
 	virtual void Tick(float DeltaTime) override;
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+	/**
+	 * @brief 重写虚幻引擎的网络复制属性获取方法，用于定义哪些属性需要在网络上进行复制。
+	 * 
+	 * 此方法会填充一个包含生命周期属性的数组，这些属性会在网络上从服务器复制到客户端。
+	 * 通过指定不同的复制条件（如何时复制、复制给谁等），可以控制属性的网络同步行为。
+	 * 
+	 * @param OutLifetimeProps 一个引用，指向用于存储需要复制的属性信息的数组。
+	 */
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
